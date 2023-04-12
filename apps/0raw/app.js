@@ -24,7 +24,7 @@ if (method == 1){
 }
 
 
-write("Time,Acc_x,Acc_y,Acc_z,PPG_r,PPG_f,PPG_vc,PPG_o\n");
+
 Bluetooth.print("Time:" + prevTime);
 
 
@@ -53,6 +53,7 @@ function onButton() {
     require("Storage").compact();
     f = require('Storage').open(filename,"a");
     write = function(str){f.write(str);events++;};
+    write("Time,Acc_x,Acc_y,Acc_z,PPG_r,PPG_f,PPG_vc,PPG_o\n");
     Bluetooth.print("doRun\n");
     doRun = true;
     
@@ -127,4 +128,3 @@ Bangle.setHRMPower(true, "eliteapp");
       if (!Bangle.isBTHRMOn()) Bangle.setBTHRMPower(1);
     }, 5000);
   }
-
