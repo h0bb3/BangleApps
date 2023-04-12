@@ -2,7 +2,7 @@
   "name": "Raw Data from Acc and Opt",
   "shortName":"0Raw",
   "icon": "0raw.png",
-  "version":"0.04",
+  "version":"0.05",
   "description": "This is a description of my awesome timer app",
   "tags": "",
   "interface": "interface.html",
