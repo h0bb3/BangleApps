@@ -2,9 +2,10 @@
   "name": "Raw Data from Acc and Opt",
   "shortName":"0Raw",
   "icon": "0raw.png",
-  "version":"0.03",
+  "version":"0.04",
   "description": "This is a description of my awesome timer app",
   "tags": "",
+  "interface": "interface.html",
   "supports": ["BANGLEJS2"],
   "storage": [
     {"name":"0raw.app.js","url":"app.js"},
