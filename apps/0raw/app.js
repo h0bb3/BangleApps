@@ -1,6 +1,6 @@
 var method=2;  // 1 = send to bluetooth
 var maxSize=0;
-var filename="0raw.log.csv";
+var filename="0raw.0.csv";
 var prevTime = Date.now();
 
 var doRun = false;
