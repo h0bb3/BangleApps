@@ -15,7 +15,7 @@ function getData() {
   // get the data
   dataElement.innerHTML = "";
   var promise = Promise.resolve();
-  Puck.eval('require("Storage").list(/\\.csv/)',files=>{
+  Puck.eval('require("Storage").list(/\\.csv$/, {sf:true})',files=>{
     if (files.length==0) {
       dataElement.innerHTML = "<p>No saved data</p>";
     } else {
