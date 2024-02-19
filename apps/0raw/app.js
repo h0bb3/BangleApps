@@ -1,6 +1,6 @@
 var method=2;  // 1 = send to bluetooth
 var maxSize=0;
-var filename="0raw.0.csv";
+var filename="0raw_0.csv";
 var prevTime = Date.now();
 
 var doRun = false;
@@ -8,7 +8,7 @@ var doRun = false;
 var events = -1;
 var hrmRaw,hrmPulse,bthrmPulse;
 
-//require("Storage").compact()
+require("Storage").compact();
 
   
 if (Bangle.setBTHRMPower){
@@ -43,15 +43,18 @@ function writeHRMraw(e){
 
 function onButton() {
   Bluetooth.print("onButton\n");
+
+  const files = require("Storage").list(/\.csv$/, {sf:true});
+  //Bluetooth.print("files " + files.length + "\n");
   
-  if (!doRun) {
+  if (!doRun && files.length < 1) {
     // Move to running state
     // first erase and compact file storage
-    Bluetooth.print("Erasing and Creating file\n");
-    var f = require('Storage').open(filename,"w");
-    f.erase();
-    require("Storage").compact();
-    f = require('Storage').open(filename,"a");
+    //Bluetooth.print("Erasing and Creating file\n");
+    //var f = require('Storage').open(filename,"w");
+    //f.erase();
+    //require("Storage").compact();
+    const f = require('Storage').open(filename,"w");
     write = function(str){f.write(str);events++;};
     write("Time,Acc_x,Acc_y,Acc_z,PPG_r,PPG_f,PPG_vc,PPG_o\n");
     Bluetooth.print("doRun\n");
@@ -107,7 +110,7 @@ Bangle.setHRMPower(true, "eliteapp");
   var intervalId = -1;
   g.setFont12x20();
   g.setColor(g.theme.fg);
-  g.drawString("Target " + (method==2?"log.csv":"Bluetooth"), 0, 2);
+  g.drawString("Target " + (method==2?filename:"Bluetooth"), 0, 2);
   let h = 1;
   //drawStatusText("Acc", h++);
   //drawStatusText("BTHRM", h++);
