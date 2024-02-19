@@ -20,7 +20,7 @@ function getData() {
       dataElement.innerHTML = "<p>No saved data</p>";
     } else {
       files.forEach(fn => {
-        fn = fn.slice(0,-1);
+        //fn = fn.slice(0,-1);
         dataElement.innerHTML += `
 <div class="card">
   <div class="card-header">
@@ -34,7 +34,7 @@ function getData() {
         promise = promise.then(function() {
           document.querySelector(`.btn[fn='${fn}'][act='save']`).addEventListener("click", function() {
             Util.readStorageFile(fn, function(data) {
-              Util.saveCSV(fn.slice(0,-4), data);
+              Util.saveCSV(fn.slice(0,-4), data); // sliced to avoid .csv.csv
             });
           });
           document.querySelector(`.btn[fn='${fn}'][act='delete']`).addEventListener("click", function() {
