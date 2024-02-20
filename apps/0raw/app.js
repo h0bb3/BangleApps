@@ -103,7 +103,7 @@ function onButton() {
     drawStatus(events>0, h++, Math.max(events,0));
     let free = require('Storage').getFree();
     drawStatus(free / 1024 > 4000, h++, Math.floor(free/1024) + "K");
-    if (free / 1024 < 4000) {
+    if (free / 1024 < 2000) {
       doRun = false;
       // switch to bluethoot writing
       //write = function(str){Bluetooth.print("DATA: " + str);events++;};
