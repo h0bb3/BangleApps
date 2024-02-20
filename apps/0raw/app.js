@@ -8,7 +8,7 @@ var doRun = false;
 var events = -1;
 var hrmRaw,hrmPulse,bthrmPulse;
 
-require("Storage").compact();
+
 
   
 if (Bangle.setBTHRMPower){
@@ -44,19 +44,28 @@ function writeHRMraw(e){
 function onButton() {
   Bluetooth.print("onButton\n");
 
-  const files = require("Storage").list(/\.csv$/, {sf:true});
+  
   //Bluetooth.print("files " + files.length + "\n");
   
-  if (!doRun && files.length < 1) {
+  if (!doRun) {
     // Move to running state
     // first erase and compact file storage
     //Bluetooth.print("Erasing and Creating file\n");
     //var f = require('Storage').open(filename,"w");
     //f.erase();
     //require("Storage").compact();
-    const f = require('Storage').open(filename,"w");
-    write = function(str){f.write(str);events++;};
-    write("Time,Acc_x,Acc_y,Acc_z,PPG_r,PPG_f,PPG_vc,PPG_o\n");
+    const files = require("Storage").list(/0raw\_0\.csv$/, {sf:true});
+    if (files <= 0) {
+      require("Storage").compact();
+      const f = require('Storage').open(filename,"w");
+      write = function(str){f.write(str);events++;};
+      write("Time,Acc_x,Acc_y,Acc_z,PPG_r,PPG_f,PPG_vc,PPG_o\n");
+    } else if (write == null) {
+      // returning from closed app continue appending
+      require("Storage").compact();
+      const f = require('Storage').open(filename,"a");
+      write = function(str){f.write(str);events++;};
+    }
     Bluetooth.print("doRun\n");
     doRun = true;
     
